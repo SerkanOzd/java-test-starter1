@@ -6,7 +6,7 @@ Unsere Struktur für den Java Test Starter analog unseres BLogposts zu einer wie
     * DBClient - Patrick mit kleinem Beispiel und DB mit Testcontainer
 	    
 	* HttpClient - restassured oder anderes - Patrick mit kleinem Beispiel
-			GraphQLClient
+	* GraphQLClient
 	* Helper
         * Datum und Zeit
         * Filesystem
