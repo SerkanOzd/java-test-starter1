@@ -1,0 +1,30 @@
+stages:
+  - test
+  - deploy
+
+e2e-test:
+  stage: test
+  image: maven:3-jdk-11
+  tags:
+    - build
+  script:
+    - mvn clean verify -Dmaven.test.failure.ignore=true
+    - mvn allure:report
+  artifacts:
+    paths:
+      - target/site/allure-maven-plugin/
+
+pages:
+  stage: deploy
+  dependencies:
+    - e2e-test
+  script:
+    - mkdir public
+    - mv target/site/allure-maven-plugin/* public/
+  artifacts:
+    paths:
+      - public
+    expire_in: 7 days
+  tags:
+    - build
+  when: always

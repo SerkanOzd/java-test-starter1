@@ -1,15 +1,15 @@
-package keys;
+package gui.keys;
 
-import base.BaseTest;
+import gui.base.GUIBaseTest;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
-import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class KeysTests extends BaseTest {
+public class KeysTests extends GUIBaseTest {
 
     @Test
-    public void testBackspace(){
+    public void testBackspace() {
         var keyPage = homePage.clickKeyPresses();
         keyPage.enterText("A" + Keys.BACK_SPACE);
 

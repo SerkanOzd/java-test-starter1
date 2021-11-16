@@ -16,3 +16,4 @@ target/
 # macOS
 .DS_Store
 
+.allure/*

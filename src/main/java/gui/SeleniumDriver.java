@@ -1,4 +1,4 @@
-package core;
+package gui;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.Browser;
