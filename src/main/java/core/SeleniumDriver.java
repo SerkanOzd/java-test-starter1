@@ -1,8 +1,10 @@
 package core;
 
-import java.util.List;
-
 import org.openqa.selenium.By;
+import org.openqa.selenium.remote.Browser;
+
+import javax.lang.model.element.Element;
+import java.util.List;
 
 public interface SeleniumDriver {
     public abstract void start(Browser browser);
