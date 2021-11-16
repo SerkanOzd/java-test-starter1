@@ -1,8 +1,9 @@
 #intellij files
-/.idea/
+/.idea/*
 .project
 .factorypath
 .classpath
+target/
 # Default ignored files
 /shelf/
 /workspace.xml
@@ -11,3 +12,8 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+
+# macOS
+.DS_Store
+
+.allure/*

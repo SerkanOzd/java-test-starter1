@@ -1,14 +1,15 @@
-package alerts;
+package gui.alerts;
 
-import base.BaseTest;
-import org.testng.annotations.Test;
+import gui.base.GUIBaseTest;
+import org.junit.jupiter.api.Test;
 
-import static org.testng.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AlertsTests extends BaseTest {
+
+public class AlertsTests extends GUIBaseTest {
 
     @Test
-    public void testAcceptAlert(){
+    public void testAcceptAlert() {
         var alertsPage = homePage.clickJavaScriptAlterts();
         alertsPage.triggerAlert();
         alertsPage.alert_clickToAccept();

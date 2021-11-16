@@ -1,32 +1,32 @@
-package base;
+package gui.base;
 
+import gui.pages.HomePage;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import pages.HomePage;
 
 
-public class BaseTest {
+public class GUIBaseTest {
 
     private WebDriver driver;
     protected HomePage homePage;
 
-    @BeforeClass
-    public void setUp(){
+    @BeforeAll
+    public void setUp() {
         System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
         driver = new ChromeDriver();
         goHome();
         homePage = new HomePage(driver);
     }
 
-    @BeforeMethod
+    @BeforeEach
     public void goHome(){
         driver.get("https://the-internet.herokuapp.com/");
     }
 
-    @AfterClass
+    @AfterAll
     public void tearDown(){
         driver.quit();
     }

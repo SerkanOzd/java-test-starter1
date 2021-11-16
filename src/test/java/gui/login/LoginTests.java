@@ -1,16 +1,16 @@
-package login;
+package gui.login;
 
-import base.BaseTest;
-import org.testng.annotations.Test;
-import pages.LoginPage;
-import pages.SecureAreaPage;
+import gui.base.GUIBaseTest;
+import gui.pages.LoginPage;
+import gui.pages.SecureAreaPage;
+import org.junit.jupiter.api.Test;
 
-import static org.testng.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LoginTests extends BaseTest {
+public class LoginTests extends GUIBaseTest {
 
     @Test
-    public void testSuccessfulLogin(){
+    public void testSuccessfulLogin() {
         LoginPage loginPage = homePage.clickFormAuthentication();
         loginPage.setUsername("tomsmith");
         loginPage.setPassword("SuperSecretPassword!");
