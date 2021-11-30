@@ -1,33 +1,24 @@
 package gui.base;
 
-import gui.pages.HomePage;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import gui.pages.HomePage;
+import gui.selenium.ChromeBrowserExtension;
 
 
 public class GUIBaseTest {
 
-    private WebDriver driver;
-    protected HomePage homePage;
+    @RegisterExtension
+    public static ChromeBrowserExtension chromeBrowserExtension = new ChromeBrowserExtension();
 
-    @BeforeAll
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
-        driver = new ChromeDriver();
-        goHome();
-        homePage = new HomePage(driver);
-    }
+    protected static HomePage homePage;
+
 
     @BeforeEach
-    public void goHome(){
+    void goHome() {
+        WebDriver driver = chromeBrowserExtension.getWebDriver();
+        homePage = new HomePage(driver);
         driver.get("https://the-internet.herokuapp.com/");
-    }
-
-    @AfterAll
-    public void tearDown(){
-        driver.quit();
     }
 }
