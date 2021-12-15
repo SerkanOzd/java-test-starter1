@@ -16,6 +16,21 @@ Chromedriver. You can either extend the `GUIBaseTest` class
 or [register](https://junit.org/junit5/docs/current/user-guide/#extensions-registration-programmatic)
 the `ChromeBrowserExtension` manually to get the Webdriver.
 
+### DB Client
+
+For the db client [JPA](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#reference) is used.\
+In order to connect to a database, you have to configure the connection in the `persistence.xml` under
+'src/main/resources/META-INF'.
+Here you can edit the existing persistence unit, or you can create new ones which are then used to communicate with 
+different databases.\
+If you have configured a persistence unit, you must create a database class under 'src/main/java/database/utils' or edit 
+the existing `Database`. This class will be used in the tests to persist entities and to get entities from the database.
+For that you have to create methods which use the persistence unit to communicate with the database.\
+Besides this, you have to create entity classes like `Student` or `Subject` under 'src/main/java/database/entity' which 
+map java objects to database tables. After creating such a class you also have to add it to the persistence unit
+in the `persistence.xml`.
+
+
 ### Ideas and ToDos
 
 * core -> als Library in einem eigenen Projekt abbilden und via Artifactory ablegen.
