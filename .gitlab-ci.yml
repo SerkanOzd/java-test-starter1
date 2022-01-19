@@ -9,6 +9,7 @@ e2e-test:
     - build
   script:
     - mvn clean verify -Dmaven.test.failure.ignore=true
+    - mvn sonar:sonar -Dsonar.host.url=https://codeanalysis.maibornwolff.de/ -Dsonar.qualitygate.wait=true -Dsonar.login=9278d3d8917762ae0a508267deed0535a5c862df
     - mvn allure:report
   artifacts:
     paths:

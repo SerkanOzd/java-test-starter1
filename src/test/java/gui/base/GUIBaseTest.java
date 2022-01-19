@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import gui.pages.HomePage;
 import gui.selenium.ChromeBrowserExtension;
 
-
+@SuppressWarnings("squid:S2187")
 public class GUIBaseTest {
 
     @RegisterExtension

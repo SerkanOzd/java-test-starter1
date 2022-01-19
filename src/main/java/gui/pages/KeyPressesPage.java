@@ -16,14 +16,6 @@ public class KeyPressesPage {
         driver.findElement(inputField).sendKeys(text);
     }
 
-    public void enterPi(){
-        /* mac
-        enterText(Keys.chord(Keys.ALT, "p") + "=3.14");
-        */
-        /*windows*/
-        enterText("π" + "=3.14");
-    }
-
     public String getResult(){
         return driver.findElement(resultText).getText();
     }

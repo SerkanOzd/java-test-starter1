@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.Level;
 import org.junit.jupiter.api.extension.AfterTestExecutionCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -17,10 +18,13 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 import io.qameta.allure.Attachment;
+import lombok.extern.java.Log;
 import static org.testcontainers.containers.BrowserWebDriverContainer.VncRecordingMode.RECORD_FAILING;
 import static org.testcontainers.containers.VncRecordingContainer.VncRecordingFormat.MP4;
 
 @Testcontainers
+@Log
+@SuppressWarnings("squid:S3740")
 public class ChromeBrowserExtension implements BeforeAllCallback, AfterTestExecutionCallback {
 
     private final ChromeOptions chromeOptions = getChromeOptions();
@@ -67,7 +71,7 @@ public class ChromeBrowserExtension implements BeforeAllCallback, AfterTestExecu
         try {
             outputStream.write(((TakesScreenshot) getWebDriver()).getScreenshotAs(OutputType.BYTES));
         } catch (IOException e) {
-            e.printStackTrace();
+            log.log(Level.SEVERE, e.getMessage());
         }
         attachScreenshotToReport(outputStream.toByteArray());
     }
@@ -86,8 +90,8 @@ public class ChromeBrowserExtension implements BeforeAllCallback, AfterTestExecu
 
 
     private DockerImageName getDockerImageName() {
-        String operatingSystem = System.getProperty("os.name");
-        String architecture = System.getProperty("os.arch");
+        String operatingSystem = System.getProperty("os.name").toLowerCase();
+        String architecture = System.getProperty("os.arch").toLowerCase();
         //Apple with M1 silicon chips need a new docker image
         if (isRunningOnLocalMachine() && operatingSystem.contains("mac") && architecture.contains("aarch64")) {
             return DockerImageName.parse("seleniarm/standalone-chromium:4.0.0-beta-1-20210215").asCompatibleSubstituteFor("selenium/standalone-chrome-debug");

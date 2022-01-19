@@ -1,21 +1,19 @@
 package gui.hover;
 
-import gui.base.GUIBaseTest;
 import org.junit.jupiter.api.Test;
+import gui.base.GUIBaseTest;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-public class HoverTests extends GUIBaseTest {
+class HoverTests extends GUIBaseTest {
 
     @Test
-    public void testHoverUser1() {
+    void testHoverUser1() {
         var hoversPage = homePage.clickHovers();
         var caption = hoversPage.hoverOverFigure(1);
 
-        assertTrue(caption.isCaptionDisplayed(), "Caption not displayed");
-        assertEquals(caption.getTitle(), "name: user1", "Caption title incorrect");
-        assertEquals(caption.getLinkText(), "View profile", "Caption link text incorrect");
-        assertTrue(caption.getLink().endsWith("/user/1"), "Link incorrect");
+        assertThat(caption.isCaptionDisplayed()).isTrue();
+        assertThat(caption.getTitle()).isEqualTo("name: user1");
+        assertThat(caption.getLinkText()).isEqualTo("View profile");
+        assertThat(caption.getLink()).endsWith("/users/1");
     }
 }

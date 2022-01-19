@@ -1,10 +1,9 @@
 package gui.login;
 
+import org.junit.jupiter.api.Test;
 import gui.base.GUIBaseTest;
 import gui.pages.LoginPage;
 import gui.pages.SecureAreaPage;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LoginTests extends GUIBaseTest {
