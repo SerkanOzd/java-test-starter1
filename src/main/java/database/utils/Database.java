@@ -28,11 +28,13 @@ public class Database implements BeforeAllCallback, AfterAllCallback {
         entityManager = entityManagerFactory.createEntityManager();
     }
 
+
     @Override
     public void afterAll(final ExtensionContext extensionContext) {
         entityManager.close();
         entityManagerFactory.close();
     }
+
 
     public void persistEntity(Object entity) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -40,6 +42,7 @@ public class Database implements BeforeAllCallback, AfterAllCallback {
         entityManager.persist(entity);
         entityTransaction.commit();
     }
+
 
     public void persistEntities(List<Object> entities) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -49,11 +52,7 @@ public class Database implements BeforeAllCallback, AfterAllCallback {
     }
 
 
-
     public <T> T findEntityById(Class<T> entityClass,Long id){
         return entityManager.find(entityClass, id);
     }
-
-
-
 }
