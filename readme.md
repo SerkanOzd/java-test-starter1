@@ -29,6 +29,12 @@ Besides this, you have to create entity classes like `Student` or `Subject` unde
 map java objects to database tables. After creating such a class you also have to add it to the persistence unit in
 the `persistence.xml`.
 
+### Kafka
+
+In order to test Kafka you can use the `Kafka` class under src/main/java/kafka/utils. This class provides a producer 
+as well as a consumer. When you instantiate the `Kafka` class you have to pass it the bootstrap servers and also the 
+group ID for the consumers. After that you can use the given methods to produce and consume messages.
+
 ## Sonarqube analysis
 
 Run the analysis with the following
