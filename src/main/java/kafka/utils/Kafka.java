@@ -76,18 +76,17 @@ public class Kafka implements BeforeAllCallback{
 
         // get the last offsets for each partition
         consumer.endOffsets(consumer.assignment()).forEach((topicPartition, offset) -> {
-            System.out.println("offset: "+offset);
 
             // seek to the last offset of each partition
             consumer.seek(topicPartition, (offset==0) ? offset:offset - 1);
 
-            // poll to get the last record in each partition
-            consumer.poll(Duration.ofSeconds(10)).forEach(record -> {
+            // poll to get the last message in each partition
+            consumer.poll(Duration.ofSeconds(10)).forEach(message -> {
 
                 // the latest record in the 'topic' is the one with the highest timestamp
-                if (record.timestamp() > maxTimestamp.get()) {
-                    maxTimestamp.set(record.timestamp());
-                    latestRecord.set(record);
+                if (message.timestamp() > maxTimestamp.get()) {
+                    maxTimestamp.set(message.timestamp());
+                    latestRecord.set(message);
                 }
             });
         });
