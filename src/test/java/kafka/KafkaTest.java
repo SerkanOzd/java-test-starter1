@@ -6,7 +6,7 @@ import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
-import kafka.utils.Kafka;
+import kafka.utils.KafkaExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -25,7 +25,7 @@ class KafkaTest {
 
     //if you use an existing kafka environment you have to replace getKafkaBootstrapServers() with your existing bootstrap server
     @RegisterExtension
-    public static final Kafka kafka = new Kafka(getKafkaBootstrapServers(), "kafkaTestGroup");
+    public static final KafkaExtension kafka = new KafkaExtension(getKafkaBootstrapServers(), "kafkaTestGroup");
 
 
     private static String getKafkaBootstrapServers() {

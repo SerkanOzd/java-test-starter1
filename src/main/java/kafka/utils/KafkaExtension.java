@@ -21,7 +21,7 @@ import org.junit.jupiter.api.extension.ExtensionContext;
  * as well as a producer and consumer to publish and consume messages
  * @author Nils Reichstein, MaibornWolff GmbH
  */
-public class Kafka implements BeforeAllCallback{
+public class KafkaExtension implements BeforeAllCallback{
 
     private String bootstrapServers;
     private String consumerGroupId;
@@ -35,7 +35,7 @@ public class Kafka implements BeforeAllCallback{
     }
 
 
-    public Kafka(String bootstrapServers, String consumerGroupId) {
+    public KafkaExtension(String bootstrapServers, String consumerGroupId) {
         this.bootstrapServers = bootstrapServers;
         this.consumerGroupId = consumerGroupId;
     }

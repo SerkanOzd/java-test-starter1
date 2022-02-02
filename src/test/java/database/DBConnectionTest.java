@@ -9,7 +9,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import database.entity.Student;
 import database.entity.Subject;
-import database.utils.Database;
+import database.utils.DatabaseExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -30,7 +30,7 @@ class DBConnectionTest {
 
     //Registers the extension which provides interaction with the database in the test container
     @RegisterExtension
-    public static final Database testDB = new Database();
+    public static final DatabaseExtension testDB = new DatabaseExtension();
 
     @Test
     void readAndWriteTest(){

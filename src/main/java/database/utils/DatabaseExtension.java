@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
  * @author Nils Reichstein, MaibornWolff GmbH
  */
 @NoArgsConstructor
-public class Database implements BeforeAllCallback, AfterAllCallback {
+public class DatabaseExtension implements BeforeAllCallback, AfterAllCallback {
 
     private static final String TEST_PU = "test_pu";
     private EntityManagerFactory entityManagerFactory;
