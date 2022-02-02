@@ -2,7 +2,6 @@ package database;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.testcontainers.containers.PostgreSQLContainer;
@@ -10,7 +9,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import database.entity.Student;
 import database.entity.Subject;
-import database.utils.Database;
+import database.utils.DatabaseExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -28,15 +27,10 @@ class DBConnectionTest {
             .withUsername("postgres")
             .withPassword("password");
 
-    //Sets the system property 'db.port' to the port which the test container is listening to
-    @BeforeAll
-    static void init() {
-        System.setProperty("db.port", postgreSQLContainer.getFirstMappedPort().toString());
-    }
 
     //Registers the extension which provides interaction with the database in the test container
     @RegisterExtension
-    public static final Database testDB = new Database();
+    public static final DatabaseExtension testDB = new DatabaseExtension();
 
     @Test
     void readAndWriteTest(){

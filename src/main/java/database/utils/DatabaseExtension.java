@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
  * @author Nils Reichstein, MaibornWolff GmbH
  */
 @NoArgsConstructor
-public class Database implements BeforeAllCallback, AfterAllCallback {
+public class DatabaseExtension implements BeforeAllCallback, AfterAllCallback {
 
     private static final String TEST_PU = "test_pu";
     private EntityManagerFactory entityManagerFactory;
@@ -28,11 +28,13 @@ public class Database implements BeforeAllCallback, AfterAllCallback {
         entityManager = entityManagerFactory.createEntityManager();
     }
 
+
     @Override
     public void afterAll(final ExtensionContext extensionContext) {
         entityManager.close();
         entityManagerFactory.close();
     }
+
 
     public void persistEntity(Object entity) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -40,6 +42,7 @@ public class Database implements BeforeAllCallback, AfterAllCallback {
         entityManager.persist(entity);
         entityTransaction.commit();
     }
+
 
     public void persistEntities(List<Object> entities) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -49,11 +52,7 @@ public class Database implements BeforeAllCallback, AfterAllCallback {
     }
 
 
-
     public <T> T findEntityById(Class<T> entityClass,Long id){
         return entityManager.find(entityClass, id);
     }
-
-
-
 }
