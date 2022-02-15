@@ -1,4 +1,4 @@
-package gui.pages;
+package gui.pages.herokuapp;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

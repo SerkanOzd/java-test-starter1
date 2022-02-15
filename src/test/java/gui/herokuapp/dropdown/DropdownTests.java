@@ -1,14 +1,14 @@
-package gui.dropdown;
+package gui.herokuapp.dropdown;
 
 import org.junit.jupiter.api.Test;
-import gui.base.GUIBaseTest;
+import gui.herokuapp.base.HerokuAppGUIBaseTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class DropdownTests extends GUIBaseTest {
+class DropdownTests extends HerokuAppGUIBaseTest {
 
     @Test
     void testSelectOption() {
-        var dropDownPage = homePage.clickDropDown();
+        var dropDownPage = herokuApphomePage.clickDropDown();
 
         String option = "Option 1";
         dropDownPage.selectFromDropDown(option);

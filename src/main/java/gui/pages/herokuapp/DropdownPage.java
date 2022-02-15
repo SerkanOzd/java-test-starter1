@@ -1,4 +1,4 @@
-package gui.pages;
+package gui.pages.herokuapp;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +22,7 @@ public class DropdownPage {
 
     public List<String> getSelectedOptions(){
         List<WebElement> selectedElements = findDropDownElement().getAllSelectedOptions();
-        return selectedElements.stream().map(e->e.getText()).collect(Collectors.toList());
+        return selectedElements.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
     private Select findDropDownElement(){

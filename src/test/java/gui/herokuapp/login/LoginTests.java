@@ -1,16 +1,16 @@
-package gui.login;
+package gui.herokuapp.login;
 
 import org.junit.jupiter.api.Test;
-import gui.base.GUIBaseTest;
-import gui.pages.LoginPage;
-import gui.pages.SecureAreaPage;
+import gui.herokuapp.base.HerokuAppGUIBaseTest;
+import gui.pages.herokuapp.LoginPage;
+import gui.pages.herokuapp.SecureAreaPage;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LoginTests extends GUIBaseTest {
+class LoginTests extends HerokuAppGUIBaseTest {
 
     @Test
-    public void testSuccessfulLogin() {
-        LoginPage loginPage = homePage.clickFormAuthentication();
+    void testSuccessfulLogin() {
+        LoginPage loginPage = herokuApphomePage.clickFormAuthentication();
         loginPage.setUsername("tomsmith");
         loginPage.setPassword("SuperSecretPassword!");
         SecureAreaPage secureAreaPage = loginPage.clickLoginButton();

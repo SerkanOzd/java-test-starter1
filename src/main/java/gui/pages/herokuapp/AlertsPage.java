@@ -1,4 +1,4 @@
-package gui.pages;
+package gui.pages.herokuapp;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,18 +24,22 @@ public class AlertsPage {
         driver.findElement(triggerPromptButton).click();
     }
 
-    public void alert_clickToAccept(){
+    public void alertClickToAccept() {
         driver.switchTo().alert().accept();
     }
 
-    public void alert_clickToDismiss(){
+
+    public void alertClickToDismiss() {
         driver.switchTo().alert().dismiss();
     }
 
-    public  String alert_getText(){
+
+    public String alertGetText() {
         return driver.switchTo().alert().getText();
     }
-    public void alert_setInput(String text){
+
+
+    public void alertSetInput(String text) {
         driver.switchTo().alert().sendKeys(text);
     }
 
