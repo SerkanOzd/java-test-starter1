@@ -1,17 +1,17 @@
-package gui.alerts;
+package gui.herokuapp.alerts;
 
 import org.junit.jupiter.api.Test;
-import gui.base.GUIBaseTest;
+import gui.herokuapp.base.HerokuAppGUIBaseTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-class AlertsTests extends GUIBaseTest {
+class AlertsTests extends HerokuAppGUIBaseTest {
 
     @Test
     void testAcceptAlert() {
-        var alertsPage = homePage.clickJavaScriptAlterts();
+        var alertsPage = herokuApphomePage.clickJavaScriptAlerts();
         alertsPage.triggerAlert();
-        alertsPage.alert_clickToAccept();
+        alertsPage.alertClickToAccept();
 
         assertThat(alertsPage.getResult()).isEqualTo("You successfully clicked an alert");
     }
@@ -19,10 +19,10 @@ class AlertsTests extends GUIBaseTest {
 
     @Test
     void testGetTextFromAlert() {
-        var alertsPage = homePage.clickJavaScriptAlterts();
+        var alertsPage = herokuApphomePage.clickJavaScriptAlerts();
         alertsPage.triggerConfirm();
-        String text = alertsPage.alert_getText();
-        alertsPage.alert_clickToDismiss();
+        String text = alertsPage.alertGetText();
+        alertsPage.alertClickToDismiss();
 
         assertThat(text).isEqualTo("I am a JS Confirm");
     }
@@ -30,12 +30,12 @@ class AlertsTests extends GUIBaseTest {
 
     @Test
     void testSetInputInAlert() {
-        var alertsPage = homePage.clickJavaScriptAlterts();
+        var alertsPage = herokuApphomePage.clickJavaScriptAlerts();
         alertsPage.triggerPrompt();
 
         String text = "TAU rocks!";
-        alertsPage.alert_setInput(text);
-        alertsPage.alert_clickToAccept();
+        alertsPage.alertSetInput(text);
+        alertsPage.alertClickToAccept();
         assertThat(alertsPage.getResult()).isEqualTo("You entered: " + text);
     }
 }
