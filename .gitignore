@@ -12,6 +12,7 @@
 # Editor-based HTTP Client requests
 /httpRequests/
 
+target/
 # macOS
 .DS_Store
 
