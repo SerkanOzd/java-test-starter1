@@ -1,6 +1,8 @@
 package rest.service;
 
 import java.util.List;
+import io.qameta.allure.Step;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -17,9 +19,11 @@ import rest.entity.Tags;
 public class PetService {
 
 
+    @Step("Create new pet with id {0}")
     public Response serializeToCreateAndStore(int petID, String petName) {
         return RestAssured.
                 given().contentType(ContentType.JSON)
+                .filter(new AllureRestAssured())
                 .and()
                 .body(createPet(petID, petName))
                 .when()
@@ -27,9 +31,11 @@ public class PetService {
     }
 
 
+    @Step("Update existing pet with id {0}")
     public Response serializeToChangeAndStore(int petID, String status) {
         return RestAssured.
                 given().contentType(ContentType.JSON)
+                .filter(new AllureRestAssured())
                 .and()
                 .body(changePet(petID, status))
                 .when()
@@ -37,9 +43,11 @@ public class PetService {
     }
 
 
+    @Step("Delete pet with id {0}")
     public Response deleteAndStore(int petID) {
         return RestAssured.
                 given().contentType(ContentType.JSON)
+                .filter(new AllureRestAssured())
                 .header("api_key", "special-key")
                 .pathParam("id", petID)
                 .when()
@@ -47,9 +55,11 @@ public class PetService {
     }
 
 
+    @Step("Get existing pet with id {0}")
     public Response getAndStore(int petID) {
         return RestAssured.
                 given().contentType(ContentType.JSON)
+                .filter(new AllureRestAssured())
                 .pathParam("id", petID)
                 .when()
                 .get("/{id}");

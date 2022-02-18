@@ -1,27 +1,37 @@
 package gui.pages.herokuapp;
 
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
+import gui.pages.common.AbstractPageObject;
 
-public class HoverPage {
-    private WebDriver driver;
-    private By figureBox = By.className("figure");
-    private By boxCaption = By.className("figcaption");
+public class HoverPage extends AbstractPageObject {
 
-    public HoverPage(WebDriver driver) {
-        this.driver = driver;
+    @FindBy(className = "figure")
+    public List<WebElement> figureBox;
+
+    @FindBy(className = "figcaption")
+    public WebElement boxCaption;
+
+
+    public HoverPage(WebDriver webDriver) {
+        super(webDriver);
     }
-    public FigureCaption hoverOverFigure(int index){
-        WebElement figure = driver.findElements(figureBox).get(index -1);
 
-        Actions actions = new Actions(driver);
+
+    public FigureCaption hoverOverFigure(int index) {
+        WebElement figure = figureBox.get(index - 1);
+
+        Actions actions = new Actions(webDriver);
         actions.moveToElement(figure).perform();
 
-        return new FigureCaption(figure.findElement(boxCaption));
+        return new FigureCaption(boxCaption);
 
     }
+
 
     public class FigureCaption {
 
@@ -29,23 +39,28 @@ public class HoverPage {
         private By header = By.tagName("h5");
         private By link = By.tagName("a");
 
+
         public FigureCaption(WebElement caption) {
             this.caption = caption;
         }
 
-        public boolean isCaptionDisplayed(){
+
+        public boolean isCaptionDisplayed() {
             return caption.isDisplayed();
         }
 
-        public String getTitle(){
+
+        public String getTitle() {
             return caption.findElement(header).getText();
         }
 
-        public String getLink(){
+
+        public String getLink() {
             return caption.findElement(link).getAttribute("href");
         }
 
-        public String getLinkText(){
+
+        public String getLinkText() {
             return caption.findElement(link).getText();
         }
     }

@@ -1,27 +1,40 @@
 package gui.pages.herokuapp;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import gui.pages.common.AbstractPageObject;
 
-public class LoginPage {
+public class LoginPage extends AbstractPageObject {
 
-    private WebDriver driver;
-    private By usernameField = By.id("username");
-    private By passwordField = By.id("password");
-    private By loginButton = By.cssSelector("#login button");
+    @FindBy(id = "username")
+    public WebElement usernameField;
 
-    public LoginPage(WebDriver driver) {
-        this.driver = driver;
+    @FindBy(id = "password")
+    public WebElement passwordField;
+
+    @FindBy(css = "#login button")
+    public WebElement loginButton;
+
+
+    public LoginPage(WebDriver webDriver) {
+        super(webDriver);
     }
 
-    public  void setUsername(String username){
-        driver.findElement(usernameField).sendKeys(username);
+
+    public void setUsername(String username) {
+        enter(usernameField, username);
+
     }
-    public  void setPassword(String password){
-        driver.findElement(passwordField).sendKeys(password);
+
+
+    public void setPassword(String password) {
+        enter(passwordField, password);
     }
-    public SecureAreaPage clickLoginButton(){
-        driver.findElement(loginButton).click();
-        return new SecureAreaPage(driver);
+
+
+    public SecureAreaPage clickLoginButton() {
+        clickOn(loginButton);
+        return new SecureAreaPage(webDriver);
     }
 }

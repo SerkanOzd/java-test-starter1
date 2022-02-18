@@ -1,44 +1,43 @@
 package gui.pages.herokuapp;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import gui.pages.common.AbstractPageObject;
 
-public class HerokuAppHomePage {
+public class HerokuAppHomePage extends AbstractPageObject {
 
-    private WebDriver driver;
-
-
-    public HerokuAppHomePage(WebDriver driver) {
-        this.driver = driver;
+    public HerokuAppHomePage(WebDriver webDriver) {
+        super(webDriver);
     }
 
 
     public LoginPage clickFormAuthentication() {
         clickLink("Form Authentication");
-        return new LoginPage(driver);
-
+        return new LoginPage(webDriver);
     }
-    public DropdownPage clickDropDown(){
+
+
+    public DropdownPage clickDropDown() {
         clickLink("Dropdown");
-        return new DropdownPage(driver);
+        return new DropdownPage(webDriver);
     }
 
-    public HoverPage clickHovers(){
+
+    public HoverPage clickHovers() {
         clickLink("Hovers");
-        return new HoverPage(driver);
+        return new HoverPage(webDriver);
     }
 
-    public KeyPressesPage clickKeyPresses(){
+
+    public KeyPressesPage clickKeyPresses() {
         clickLink("Key Presses");
-        return new KeyPressesPage(driver);
+        return new KeyPressesPage(webDriver);
     }
+
 
     public AlertsPage clickJavaScriptAlerts() {
         clickLink("JavaScript Alerts");
-        return new AlertsPage(driver);
+        return new AlertsPage(webDriver);
     }
 
-    private void clickLink(String linkText){
-        driver.findElement(By.linkText(linkText)).click();
-    }
+
 }

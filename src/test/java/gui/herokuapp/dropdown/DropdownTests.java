@@ -11,7 +11,7 @@ class DropdownTests extends HerokuAppGUIBaseTest {
         var dropDownPage = herokuApphomePage.clickDropDown();
 
         String option = "Option 1";
-        dropDownPage.selectFromDropDown(option);
+        dropDownPage.selectOptionFromDropDown(option);
         var selectedOptions = dropDownPage.getSelectedOptions();
 
         assertThat(selectedOptions.size()).isEqualTo(1);

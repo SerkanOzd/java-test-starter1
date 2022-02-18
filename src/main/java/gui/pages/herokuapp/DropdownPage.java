@@ -2,31 +2,31 @@ package gui.pages.herokuapp;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+import gui.pages.common.AbstractPageObject;
 
-public class DropdownPage {
+public class DropdownPage extends AbstractPageObject {
 
-    private WebDriver driver;
-    private By dropdown = By.id("dropdown");
+    @FindBy(id = "dropdown")
+    public WebElement dropdown;
+
 
     public DropdownPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
-    public  void selectFromDropDown(String option){
-        findDropDownElement().selectByVisibleText(option);
+
+    public void selectOptionFromDropDown(String option) {
+        selectByText(dropdown, option);
     }
 
-    public List<String> getSelectedOptions(){
-        List<WebElement> selectedElements = findDropDownElement().getAllSelectedOptions();
+
+    public List<String> getSelectedOptions() {
+        List<WebElement> selectedElements = new Select(dropdown).getAllSelectedOptions();
         return selectedElements.stream().map(WebElement::getText).collect(Collectors.toList());
-    }
-
-    private Select findDropDownElement(){
-        return new Select(driver.findElement(dropdown));
     }
 
 }

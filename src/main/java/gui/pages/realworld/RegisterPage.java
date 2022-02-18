@@ -1,34 +1,45 @@
 package gui.pages.realworld;
 
-import gui.pages.herokuapp.SecureAreaPage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import gui.pages.common.AbstractPageObject;
+import gui.pages.herokuapp.SecureAreaPage;
 
-public class RegisterPage {
+public class RegisterPage extends AbstractPageObject {
 
-    private WebDriver driver;
-    private By usernameField = By.xpath("//input[@type='text']");
-    private By emailField = By.xpath("//input[@type='email']");
-    private By passwordField = By.xpath("//input[@type='password']");
+    @FindBy(xpath = "//input[@type='text']")
+    public WebElement usernameField;
+    @FindBy(xpath = "//input[@type='email']")
+    public WebElement emailField;
+    @FindBy(xpath = "//input[@type='password']")
+    public WebElement passwordField;
+    @FindBy(xpath = "//button")
+    public WebElement registerButton;
 
-    private By registerButton = By.xpath("//button");
 
-    public RegisterPage(WebDriver driver) {
-        this.driver = driver;
+    public RegisterPage(WebDriver webDriver) {
+        super(webDriver);
     }
 
-    public  void setUsername(String username){
-        driver.findElement(usernameField).sendKeys(username);
-    }
-    public  void setEmail(String password){
-        driver.findElement(emailField).sendKeys(password);
-    }
-    public  void setPassword(String password){
-        driver.findElement(passwordField).sendKeys(password);
+
+    public void setUsername(String username) {
+        enter(usernameField, username);
     }
 
-    public SecureAreaPage clickLoginButton(){
-        driver.findElement(registerButton).click();
-        return new SecureAreaPage(driver);
+
+    public void setEmail(String email) {
+        enter(emailField, email);
+    }
+
+
+    public void setPassword(String password) {
+        enter(passwordField, password);
+    }
+
+
+    public SecureAreaPage clickRegisterButton() {
+        registerButton.click();
+        return new SecureAreaPage(webDriver);
     }
 }

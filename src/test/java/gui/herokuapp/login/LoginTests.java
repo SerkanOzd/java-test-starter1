@@ -14,7 +14,7 @@ class LoginTests extends HerokuAppGUIBaseTest {
         loginPage.setUsername("tomsmith");
         loginPage.setPassword("SuperSecretPassword!");
         SecureAreaPage secureAreaPage = loginPage.clickLoginButton();
-        assertTrue(secureAreaPage.getAlerText().contains("You logged into a secure area!"), "Alert text is incorrect");
+        assertTrue(secureAreaPage.getAlertText().contains("You logged into a secure area!"), "Alert text is incorrect");
 
     }
 }

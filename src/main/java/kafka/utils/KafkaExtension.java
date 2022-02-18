@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.logging.Level;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -15,18 +16,23 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
+import io.qameta.allure.Step;
+import lombok.extern.java.Log;
 
 /**
  * This class is an extension and is used to provide connectivity to a kafka
  * as well as a producer and consumer to publish and consume messages
+ *
  * @author Nils Reichstein, MaibornWolff GmbH
  */
-public class KafkaExtension implements BeforeAllCallback{
+@Log
+public class KafkaExtension implements BeforeAllCallback {
 
     private String bootstrapServers;
     private String consumerGroupId;
     private KafkaProducer<String, String> producer;
     private KafkaConsumer<String, String> consumer;
+
 
     @Override
     public void beforeAll(final ExtensionContext extensionContext) {
@@ -50,6 +56,7 @@ public class KafkaExtension implements BeforeAllCallback{
     }
 
 
+    @Step("Write message '{1}' to topic {0}")
     public void publishMessageToTopic(String topic, String message) {
         ProducerRecord<String, String> producedRecord = new ProducerRecord<>(topic, message);
         this.producer.send(producedRecord);
@@ -78,7 +85,7 @@ public class KafkaExtension implements BeforeAllCallback{
         consumer.endOffsets(consumer.assignment()).forEach((topicPartition, offset) -> {
 
             // seek to the last offset of each partition
-            consumer.seek(topicPartition, (offset==0) ? offset:offset - 1);
+            consumer.seek(topicPartition, (offset == 0) ? offset : offset - 1);
 
             // poll to get the last message in each partition
             consumer.poll(Duration.ofSeconds(10)).forEach(message -> {
@@ -90,6 +97,14 @@ public class KafkaExtension implements BeforeAllCallback{
                 }
             });
         });
-        return latestRecord.get().value();
+        String latestMessage = latestRecord.get().value();
+        logMessage(topic, latestMessage);
+        return latestMessage;
+    }
+
+
+    @Step("Latest message from topic {0} is: {1}")
+    private void logMessage(String topic, String message) {
+        log.log(Level.INFO, message);
     }
 }
