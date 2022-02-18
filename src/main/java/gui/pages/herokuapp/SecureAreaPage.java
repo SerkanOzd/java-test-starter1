@@ -1,18 +1,23 @@
 package gui.pages.herokuapp;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import gui.pages.common.AbstractPageObject;
 
-public class SecureAreaPage {
-    private final WebDriver driver;
-    private By statusAlert = By.id("flash");
+public class SecureAreaPage extends AbstractPageObject {
 
-    public SecureAreaPage(WebDriver driver) {
-        this.driver = driver;
 
+    @FindBy(id = "flash")
+    public WebElement statusAlert;
+
+
+    public SecureAreaPage(WebDriver webDriver) {
+        super(webDriver);
     }
 
-    public String getAlerText() {
-        return driver.findElement(statusAlert).getText();
+
+    public String getAlertText() {
+        return getText(statusAlert);
     }
 }

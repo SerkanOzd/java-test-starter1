@@ -1,49 +1,66 @@
 package gui.pages.herokuapp;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import gui.pages.common.AbstractPageObject;
 
-public class AlertsPage {
-    private WebDriver driver;
-    private  By triggerAlertButton = By.xpath(".//button[text()='Click for JS Alert']");
-    private  By triggerConfirmButton = By.xpath(".//button[text()='Click for JS Confirm']");
-    private  By triggerPromptButton = By.xpath(".//button[text()='Click for JS Prompt']");
-    private  By results = By.id("result");
+public class AlertsPage extends AbstractPageObject {
 
-    public AlertsPage(WebDriver driver) {
-        this.driver = driver;
+    @FindBy(xpath = ".//button[text()='Click for JS Alert']")
+    public WebElement triggerAlertButton;
+
+    @FindBy(xpath = ".//button[text()='Click for JS Confirm']")
+    public WebElement triggerConfirmButton;
+
+    @FindBy(xpath = ".//button[text()='Click for JS Prompt']")
+    public WebElement triggerPromptButton;
+
+    @FindBy(id = "result")
+    public WebElement result;
+
+
+    public AlertsPage(WebDriver webDriver) {
+        super(webDriver);
     }
+
 
     public void triggerAlert() {
-        driver.findElement(triggerAlertButton).click();
-    }
-    public void triggerConfirm() {
-        driver.findElement(triggerConfirmButton).click();
-    }
-    public void triggerPrompt() {
-        driver.findElement(triggerPromptButton).click();
+        clickOnWithoutScreenshot(triggerAlertButton);
     }
 
+
+    public void triggerConfirm() {
+        clickOnWithoutScreenshot(triggerConfirmButton);
+    }
+
+
+    public void triggerPrompt() {
+        clickOnWithoutScreenshot(triggerPromptButton);
+    }
+
+
     public void alertClickToAccept() {
-        driver.switchTo().alert().accept();
+        webDriver.switchTo().alert().accept();
     }
 
 
     public void alertClickToDismiss() {
-        driver.switchTo().alert().dismiss();
+        webDriver.switchTo().alert().dismiss();
     }
 
 
     public String alertGetText() {
-        return driver.switchTo().alert().getText();
+        return webDriver.switchTo().alert().getText();
     }
 
 
     public void alertSetInput(String text) {
-        driver.switchTo().alert().sendKeys(text);
+        webDriver.switchTo().alert().sendKeys(text);
     }
 
-    public String getResult(){
-        return driver.findElement(results).getText();
+
+    public String getResult() {
+        return result.getText();
     }
 }

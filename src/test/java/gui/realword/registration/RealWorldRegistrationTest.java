@@ -24,6 +24,6 @@ class RealWorldRegistrationTest extends RealWorldGUIBaseTest {
         registerPage.setEmail(generator.getFaker().internet().emailAddress());
         registerPage.setPassword(generator.getFaker().internet().password());
 
-        assertThat(realWorldHomePage.isLoggedIn()).withFailMessage("User don't registered").isTrue();
+        assertThat(realWorldHomePage.isUserLoggedIn()).withFailMessage("User isn't registered").isTrue();
     }
 }

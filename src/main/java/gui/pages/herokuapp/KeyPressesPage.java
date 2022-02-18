@@ -1,22 +1,30 @@
 package gui.pages.herokuapp;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import gui.pages.common.AbstractPageObject;
 
-public class KeyPressesPage {
-    private final WebDriver driver;
-    private By inputField = By.id("target");
-    private By resultText = By.id("result");
+public class KeyPressesPage extends AbstractPageObject {
 
-    public KeyPressesPage(WebDriver driver) {
-        this.driver = driver;
+    @FindBy(id = "target")
+    public WebElement inputField;
+
+    @FindBy(id = "result")
+    public WebElement resultText;
+
+
+    public KeyPressesPage(WebDriver webDriver) {
+        super(webDriver);
     }
 
-    public void enterText(String text){
-        driver.findElement(inputField).sendKeys(text);
+
+    public void enterText(String text) {
+        enter(inputField, text);
     }
 
-    public String getResult(){
-        return driver.findElement(resultText).getText();
+
+    public String getResult() {
+        return getText(resultText);
     }
 }

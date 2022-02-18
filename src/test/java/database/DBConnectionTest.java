@@ -34,7 +34,7 @@ class DBConnectionTest {
 
     @Test
     void readAndWriteTest(){
-        //-------- persist singel entity --------//
+        //-------- persist single entity --------//
         Student student = Student.builder()
                 .firstName("Max")
                 .lastName("Mustermann")
@@ -80,10 +80,10 @@ class DBConnectionTest {
 
         //------ get entity from db ------//
         Student testStudent = testDB.findEntityById(Student.class ,student.getId());
-        assertThat(testStudent.getFirstName()).isEqualTo("Max");
+        assertThat(testStudent.getFirstName()).as("First name of student").isEqualTo("Max");
 
         Subject testSubject = testDB.findEntityById(Subject.class ,subject.getId());
-        assertThat(testSubject.getName()).isEqualTo(subject.getName());
+        assertThat(testSubject.getName()).as("Name of subject").isEqualTo(subject.getName());
         //---------------------------------------//
     }
 }

@@ -1,33 +1,29 @@
 package gui.pages.realworld;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import gui.pages.common.AbstractPageObject;
 
-public class RealWorldHomePage {
+public class RealWorldHomePage extends AbstractPageObject {
+
+    @FindBy(xpath = "//ul[@show-authed='true']//a/img")
+    public WebElement isLoggedIn;
 
 
-    private By isLoggedIn = By.xpath("//ul[@show-authed='true']//a/img");
-
-    private WebDriver driver;
-
-
-    public RealWorldHomePage(WebDriver driver) {
-        this.driver = driver;
+    public RealWorldHomePage(WebDriver webDriver) {
+        super(webDriver);
     }
 
 
     public RegisterPage clickSignUp() {
         clickLink("Sign up");
-        return new RegisterPage(driver);
+        return new RegisterPage(webDriver);
     }
 
 
-    private void clickLink(String linkText) {
-        driver.findElement(By.linkText(linkText)).click();
-    }
-
-
-    public boolean isLoggedIn() {
-        return driver.findElement(isLoggedIn).isEnabled();
+    public boolean isUserLoggedIn() {
+        //For demonstration purposes we let this test fail, so it will always return false
+        return false;
     }
 }
